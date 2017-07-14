@@ -93,12 +93,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2017/07/index.html">
+<meta name="description" content="docker –help docker info查看有多少images 和 containers docker images ：查看images docker ps -a ：查看containers sudo docker pull hello-world ：hello-world是一个最小的Linux系统，它提供了该系统的主要功能，不包含一些与GNU相关的功能和选项  下一步我们将运行一个“H">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker入门教程">
+<meta property="og:url" content="http://yoursite.com/2016/01/19/Docker入门教程/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="docker –help docker info查看有多少images 和 containers docker images ：查看images docker ps -a ：查看containers sudo docker pull hello-world ：hello-world是一个最小的Linux系统，它提供了该系统的主要功能，不包含一些与GNU相关的功能和选项  下一步我们将运行一个“H">
+<meta property="og:updated_time" content="2017-07-07T07:44:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Docker入门教程">
+<meta name="twitter:description" content="docker –help docker info查看有多少images 和 containers docker images ：查看images docker ps -a ：查看containers sudo docker pull hello-world ：hello-world是一个最小的Linux系统，它提供了该系统的主要功能，不包含一些与GNU相关的功能和选项  下一步我们将运行一个“H">
 
 
 
@@ -126,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2017/07/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/01/19/Docker入门教程/"/>
 
 
 
 
 
-  <title>Archiv | Hexo</title>
+  <title>Docker入门教程 | Hexo</title>
   
 
 
@@ -157,7 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -241,66 +245,213 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      Öhm..! Insgesamt 7 Artikel. Bleib dran.
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/19/Docker入门教程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker入门教程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-19T14:51:45+08:00">
+                2016-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jekyll-update/" itemprop="url" rel="index">
+                    <span itemprop="name">jekyll update</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <ul>
+<li>docker –help</li>
+<li>docker info查看有多少images 和 containers</li>
+<li>docker images ：查看images</li>
+<li>docker ps -a ：查看containers</li>
+<li>sudo docker pull hello-world ：hello-world是一个最小的Linux系统，它提供了该系统的主要功能，不包含一些与GNU相关的功能和选项</li>
+</ul>
+<p>下一步我们将运行一个“Hello World”的例子，我们暂且叫它“Hello Docker”吧。</p>
+<ul>
+<li>docker run hello-workd<br>现在，让我们以后台进程的方式运行hello docker：<br>sample_job=$(docker run -d hello-world)<br>sample_job命令会打印一次Docker，使用docker logs可以查看输出的结果。如果没有给这个job起名字，那这个job就会被分配一个id，以后使用命令例如docker logs查看日志就会变得比较麻烦。</li>
+</ul>
+<p>运行docker logs命令来查看job的当前状态：</p>
+<ul>
+<li>docker logs $sample_job</li>
+</ul>
+<p>名为sample_job的容器，可以使用以下命令来停止：</p>
+<ul>
+<li>docker stop $sample_job</li>
+</ul>
+<p>使用以下命令可以重新启动该容器：</p>
+<ul>
+<li><p>docker restart $sample_job<br>如果要完全移除容器，需要先将该容器停止，然后才能移除。像这样：</p>
+</li>
+<li><p>docker stop $sample_job<br>docker rm $sample_job</p>
+</li>
+</ul>
+<p>将容器的状态保存为镜像，使用以下命令：</p>
+<ul>
+<li>docker commit $sample_job job1</li>
+</ul>
+<p>注意，镜像名称只能取字符[a-z]和数字[0-9]。<br>现在，你就可以使用以下命令查看所有镜像的列表：</p>
+<ul>
+<li>docker images</li>
+</ul>
+<p>在我们之前的Docker教程中，我们学习过镜像是存储在Docker registry。在registry中的镜像可以使用以下命令查找到：</p>
+<ul>
+<li>docker search (image-name)</li>
+</ul>
+<p>查看镜像的历史版本可以执行以下命令：</p>
+<ul>
+<li>docker history (image_name)</li>
+</ul>
+<p>最后，使用以下命令将镜像推送到registry：</p>
+<ul>
+<li>docker push (image_name)</li>
+</ul>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/13/JAVA nio 之MappedByteBuffer/" rel="next" title="java nio 之MappedByteBuffer">
+                <i class="fa fa-chevron-left"></i> java nio 之MappedByteBuffer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/08/RocketMQ源码分析-索引服务/" rel="prev" title="RocketMQ源码分析-索引服务">
+                RocketMQ源码分析-索引服务 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
         </div>
       
-      
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/14/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-14T11:19:33+08:00"
-              content="2017-07-14" >
-          07-14
-        </time>
-      </div>
-
-    </header>
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -308,6 +459,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -495,11 +650,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   

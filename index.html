@@ -200,7 +200,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Accueil
+            Startseite
           </a>
         </li>
       
@@ -210,7 +210,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -282,7 +282,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-14T11:19:33+08:00">
                 2017-07-14
@@ -364,6 +364,918 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/08/RocketMQ源码分析-索引服务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/04/08/RocketMQ源码分析-索引服务/" itemprop="url">RocketMQ源码分析-索引服务</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-08T14:51:45+08:00">
+                2016-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jekyll-update/" itemprop="url" rel="index">
+                    <span itemprop="name">jekyll update</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一、存储"><a href="#一、存储" class="headerlink" title="一、存储"></a>一、存储</h1><ul>
+<li>IndexService的run调用buildIndex</li>
+<li>调用indexFile.putKey（topic+key,commitLogOffset,storeTimestap）</li>
+<li>IndexFile主要保存key的hash和phyOffset，note: 这里的key原来是topic + “#” + key</li>
+<li>一个IndexFile映射一个MappedByteBuffer,利用putInt(hash%slot槽数),putInt(phyOffset)来存储的，无需序列化</li>
+<li>如果getInt()函数被调用，从当前的位置开始的四个字节会被包装成一个int类型的变量然后作为函数的返回值返回，所以顺序读也还行</li>
+</ul>
+<h1 id="二、查询流程"><a href="#二、查询流程" class="headerlink" title="二、查询流程"></a>二、查询流程</h1><p>//begin=0,end=Long.MAX_VALUE</p>
+<p>QueryResult queryMessage(final String topic, final String key, final int maxNum, final long begin, final long end)；</p>
+<ul>
+<li>1、先根据Topic找到所有broker列表</li>
+<li>2、循环去broker的所有的indexFile查找，如果是lastIndexFile，还要根据storeTimeStap判断是不是处于查找范围，是的话还要加锁；</li>
+<li>3、然后buildKey（topic + “#” + key），然后从前到后读取mappedByteBuffer.getInt(absIndexPos)，相等则匹配；</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/19/Docker入门教程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/01/19/Docker入门教程/" itemprop="url">Docker入门教程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-19T14:51:45+08:00">
+                2016-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jekyll-update/" itemprop="url" rel="index">
+                    <span itemprop="name">jekyll update</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>docker –help</li>
+<li>docker info查看有多少images 和 containers</li>
+<li>docker images ：查看images</li>
+<li>docker ps -a ：查看containers</li>
+<li>sudo docker pull hello-world ：hello-world是一个最小的Linux系统，它提供了该系统的主要功能，不包含一些与GNU相关的功能和选项</li>
+</ul>
+<p>下一步我们将运行一个“Hello World”的例子，我们暂且叫它“Hello Docker”吧。</p>
+<ul>
+<li>docker run hello-workd<br>现在，让我们以后台进程的方式运行hello docker：<br>sample_job=$(docker run -d hello-world)<br>sample_job命令会打印一次Docker，使用docker logs可以查看输出的结果。如果没有给这个job起名字，那这个job就会被分配一个id，以后使用命令例如docker logs查看日志就会变得比较麻烦。</li>
+</ul>
+<p>运行docker logs命令来查看job的当前状态：</p>
+<ul>
+<li>docker logs $sample_job</li>
+</ul>
+<p>名为sample_job的容器，可以使用以下命令来停止：</p>
+<ul>
+<li>docker stop $sample_job</li>
+</ul>
+<p>使用以下命令可以重新启动该容器：</p>
+<ul>
+<li><p>docker restart $sample_job<br>如果要完全移除容器，需要先将该容器停止，然后才能移除。像这样：</p>
+</li>
+<li><p>docker stop $sample_job<br>docker rm $sample_job</p>
+</li>
+</ul>
+<p>将容器的状态保存为镜像，使用以下命令：</p>
+<ul>
+<li>docker commit $sample_job job1</li>
+</ul>
+<p>注意，镜像名称只能取字符[a-z]和数字[0-9]。<br>现在，你就可以使用以下命令查看所有镜像的列表：</p>
+<ul>
+<li>docker images</li>
+</ul>
+<p>在我们之前的Docker教程中，我们学习过镜像是存储在Docker registry。在registry中的镜像可以使用以下命令查找到：</p>
+<ul>
+<li>docker search (image-name)</li>
+</ul>
+<p>查看镜像的历史版本可以执行以下命令：</p>
+<ul>
+<li>docker history (image_name)</li>
+</ul>
+<p>最后，使用以下命令将镜像推送到registry：</p>
+<ul>
+<li>docker push (image_name)</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/13/JAVA nio 之MappedByteBuffer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/05/13/JAVA nio 之MappedByteBuffer/" itemprop="url">java nio 之MappedByteBuffer</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-13T14:51:45+08:00">
+                2015-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jekyll-update/" itemprop="url" rel="index">
+                    <span itemprop="name">jekyll update</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>其实掌握MappedByteBuffer并不难，只要记住“三方三法三特性”（我自己总结的，呵呵~~不要扔鸡蛋哦。。。）这句话就可以轻松搞定！<br>MappedByteBuffer 只是一种特殊的 ByteBuffer ，即是ByteBuffer的子类。 MappedByteBuffer 将文件直接映射到内存（这里的内存指的是虚拟内存，并不是物理内存，后面说证明这一点）。通常，可以映射整个文件，如果文件比较大的话可以分段进行映射，只要指定文件的那个部分就可以。而且，与ByteBuffer十分类似，没有构造函数（你不可new MappedByteBuffer（）来构造一个MappedByteBuffer），我们可以通过 java.nio.channels.FileChannel 的 map() 方法来获取 MappedByteBuffer 。其实说的通俗一点就是Map把文件的内容被映像到计算机虚拟内存的一块区域，这样就可以直接操作内存当中的数据而无需操作的时候每次都通过I/O去物理硬盘读取文件，所以效率上有很大的提升！<br>三种方式：</p>
+<p>FileChannel提供了map方法来把文件影射为内存映像文件： MappedByteBuffer map(int mode,long position,long size); 可以把文件的从position开始的size大小的区域映射为内存映像文件，mode指出了 可访问该内存映像文件的方式：READ_ONLY,READ_WRITE,PRIVATE.                     </p>
+<ul>
+<li>a. READ_ONLY,（只读）： 试图修改得到的缓冲区将导致抛出 ReadOnlyBufferException.(MapMode.READ_ONLY)</li>
+<li>b. READ_WRITE（读/写）： 对得到的缓冲区的更改最终将传播到文件；该更改对映射到同一文件的其他程序不一定是可见的。 (MapMode.READ_WRITE)</li>
+<li>c. PRIVATE（专用）： 对得到的缓冲区的更改不会传播到文件，并且该更改对映射到同一文件的其他程序也不是可见的；相反，会创建缓冲区已修改部分的专用副本。 (MapMode.PRIVATE)</li>
+</ul>
+<p>三个方法：<br>a. fore();缓冲区是READ_WRITE模式下，此方法对缓冲区内容的修改强行写入文件<br>b. load()将缓冲区的内容载入内存，并返回该缓冲区的引用<br>c. isLoaded()如果缓冲区的内容在物理内存中，则返回真，否则返回假<br>三个特性：<br>调用信道的map()方法后，即可将文件的某一部分或全部映射到内存中，映射内存缓冲区是个直接缓冲区，继承自ByteBuffer,但相对于ByteBuffer,它有更多的优点：<br>a. 读取快<br>b. 写入快<br>c. 随时随地写入<br>       口说无凭，俗话说的好，是金子是银子拿来炼一炼就知道(也不知道有没有这么一句俗话，反正用到这还合适，就这么凑合吧，大家扔鸡蛋~~~)！<br>1 MappedByteBuffer的读取/写入文件和普通I/O流的对比：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.FileInputStream;</div><div class="line"><span class="keyword">import</span> java.io.FileOutputStream;</div><div class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</div><div class="line"><span class="keyword">import</span> java.nio.CharBuffer;</div><div class="line"><span class="keyword">import</span> java.nio.MappedByteBuffer;</div><div class="line"><span class="keyword">import</span> java.nio.channels.FileChannel;</div><div class="line"><span class="keyword">import</span> java.nio.charset.Charset;</div><div class="line"><span class="keyword">import</span> java.nio.charset.CharsetDecoder; </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapMemeryBuffer</span> </span>&#123;</div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">              ByteBuffer byteBuf = ByteBuffer.allocate(<span class="number">1024</span> * <span class="number">14</span> * <span class="number">1024</span>);</div><div class="line">              <span class="keyword">byte</span>[] bbb = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">14</span> * <span class="number">1024</span> * <span class="number">1024</span>];</div><div class="line">              FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"d://test"</span>);</div><div class="line">              FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"d://outFile.txt"</span>);</div><div class="line">              FileChannel fc = fis.getChannel();</div><div class="line">             </div><div class="line">              <span class="keyword">long</span> timeStar = System.currentTimeMillis();<span class="comment">//得到当前的时间</span></div><div class="line"> </div><div class="line">              fc.read(byteBuf);<span class="comment">//1 读取</span></div><div class="line"> </div><div class="line">              <span class="keyword">long</span> timeEnd = System.currentTimeMillis();<span class="comment">//得到当前的时间</span></div><div class="line"> </div><div class="line">              System.out.println(<span class="string">"Read time :"</span> + (timeEnd - timeStar) + <span class="string">"ms"</span>);</div><div class="line">              timeStar = System.currentTimeMillis();</div><div class="line"> </div><div class="line">              fos.write(bbb);<span class="comment">// 写入</span></div><div class="line"> </div><div class="line">              timeEnd = System.currentTimeMillis();</div><div class="line">              System.out.println(<span class="string">"Write time :"</span> + (timeEnd - timeStar) + <span class="string">"ms"</span>);</div><div class="line">              fos.flush();</div><div class="line">              fc.close();</div><div class="line">              fis.close();</div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出结果：<br>Read time :1874ms<br>Write time :360ms<br>把上面的程序的1换成MappedByteBuffer mbb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fileLength);<br>2换成mbb.flip();<br>输出结果：<br>Read ByteBuf take time :16ms<br>Write ByteBuf take time :0ms<br>可见普通I/O和MappedByteBuffer是没法比的。另外在写入的时候花了0ms说明Map写入机制是根据你的更改量来决定，就是只保存修改部分的！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/07/RocketMQ源码分析-Broker存储消息过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/04/07/RocketMQ源码分析-Broker存储消息过程/" itemprop="url">RocketMQ源码分析-Broker存储消息过程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-07T11:51:45+08:00">
+                2015-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jekyll-update/" itemprop="url" rel="index">
+                    <span itemprop="name">jekyll update</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="broker模块："><a href="#broker模块：" class="headerlink" title="broker模块："></a>broker模块：</h1><pre><code>processer：
+    SendMessageProcessor：处理客户端发送消息的请求
+    sendMessage，根据request中传过来的Topic和queueId，然后调用MessageStore的putMessage并返回PutMessageResult，统计调用次数
+    PutMessageResult成功包括（PUT_OK、FLUSH_DISK_TIMEOUT、FLUSH_SLAVE_TIMEOUT、SLAVE_NOT_AVAILABLE）；失败包括（CREATE_MAPEDFILE_FAILED、MESSAGE_ILLEGAL、SERVICE_NOT_AVAILABLE、UNKNOWN_ERROR）
+</code></pre><h1 id="store模块："><a href="#store模块：" class="headerlink" title="store模块："></a>store模块：</h1><pre><code>MessageStore：构造函数会IndexService start;
+    putMessage,先判断服务是否shutdown,broker是否是slave、broker是否可写、消息长度；然后调用commitLog.putMessage
+CommitLog：
+    putMessage：先判断是不是TransactionNotType或者TransactionCommitType，如果是，再看getDelayTimeLevel&gt;0则更改消息的Topic为SCHEDULE_TOPIC
+    然后调用mapedFileQueue.getLastMapedFile()获取上次的MappedFile，调用其appendMessage并以一个callback为参数传过去
+    然后MessageStore调用putDispatchRequest（new一个DispatchRequest）
+    判断同步刷盘SYNC_FLUSH，则GroupCommitRequest调用waitForFlush；否则让flushCommitLogService唤醒wakeup,
+    判断同步双写SYNC_MASTER，则GroupCommitRequest调用waitForFlush；
+
+MappedFile：
+    appendMessage向mappedByteBuffer追加消息，并执行callback(用来对消息进行序列化)：这里才是真正写mappedByteBuffer
+MessageStore：
+    putDispatchRequest，putRequest:先requestsWrite中添加dispatchRequest，然后这里主动做流控，防止CommitLog写入太快，导致消费队列被冲垮；然后看run方法，waitForRunning将调用swapRequests，requestsWrite和requestsRead交换———》doDispatch将分发消息位置信息到ConsumeQueue，同时indexService的putRequest
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/19/JVM堆外内存/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/01/19/JVM堆外内存/" itemprop="url">堆外内存</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-19T14:51:45+08:00">
+                2015-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jekyll-update/" itemprop="url" rel="index">
+                    <span itemprop="name">jekyll update</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="为什么要使用堆外内存"><a href="#为什么要使用堆外内存" class="headerlink" title="为什么要使用堆外内存"></a>为什么要使用堆外内存</h1><p>DirectByteBuffer在创建的时候会通过Unsafe的native方法来直接使用malloc分配一块内存，这块内存是heap之外的，那么自然也不会对gc造成什么影响(System.gc除外)，因为gc耗时的操作主要是操作heap之内的对象，对这块内存的操作也是直接通过Unsafe的native方法来操作的，相当于DirectByteBuffer仅仅是一个壳，还有我们通信过程中如果数据是在Heap里的，最终也还是会copy一份到堆外，然后再进行发送，所以为什么不直接使用堆外内存呢。对于需要频繁操作的内存，并且仅仅是临时存在一会的，都建议使用堆外内存，并且做成缓冲池，不断循环利用这块内存。</p>
+<h1 id="为什么不能大面积使用堆外内存"><a href="#为什么不能大面积使用堆外内存" class="headerlink" title="为什么不能大面积使用堆外内存"></a>为什么不能大面积使用堆外内存</h1><p>如果我们大面积使用堆外内存并且没有限制，那迟早会导致内存溢出，毕竟程序是跑在一台资源受限的机器上，因为这块内存的回收不是你直接能控制的，当然你可以通过别的一些途径，比如反射，直接使用Unsafe接口等，但是这些务必给你带来了一些烦恼，Java与生俱来的优势被你完全抛弃了—开发不需要关注内存的回收，由gc算法自动去实现。另外上面的gc机制与堆外内存的关系也说了，如果一直触发不了cms gc或者full gc，那么后果可能很严重。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/02/11/Netty 超时机制及心跳程序实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/02/11/Netty 超时机制及心跳程序实现/" itemprop="url">Netty 超时机制及心跳程序实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-02-11T14:51:45+08:00">
+                2014-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jekyll-update/" itemprop="url" rel="index">
+                    <span itemprop="name">jekyll update</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Netty-超时机制的介绍"><a href="#Netty-超时机制的介绍" class="headerlink" title="Netty 超时机制的介绍"></a>Netty 超时机制的介绍</h1><p>Netty 的超时类型 IdleState 主要分为：</p>
+<ul>
+<li>ALL_IDLE : 一段时间内没有数据接收或者发送</li>
+<li>READER_IDLE ： 一段时间内没有数据接收</li>
+<li>WRITER_IDLE ： 一段时间内没有数据发送</li>
+</ul>
+<p>在 Netty 的 timeout 包下，主要类有：</p>
+<ul>
+<li>IdleStateEvent ： 超时的事件</li>
+<li>IdleStateHandler ： 超时状态处理</li>
+<li>ReadTimeoutHandler ： 读超时状态处理</li>
+<li>WriteTimeoutHandler ： 写超时状态处理</li>
+</ul>
+<p>其中 IdleStateHandler 包含了读\写超时状态处理，比如：</p>
+<ul>
+<li>private static final int READ_IDEL_TIME_OUT = 4; // 读超时</li>
+<li>private static final int WRITE_IDEL_TIME_OUT = 5;// 写超时</li>
+<li>private static final int ALL_IDEL_TIME_OUT = 7; // 所有超时</li>
+</ul>
+<p>new IdleStateHandler(READ_IDEL_TIME_OUT,WRITE_IDEL_TIME_OUT, ALL_IDEL_TIME_OUT, TimeUnit.SECONDS));<br>上述例子，在 IdleStateHandler 中定义了读超时的时间是 4 秒， 写超时的时间是 5 秒，其他所有的超时时间是 7 秒。</p>
+<p>应用 IdleStateHandler<br>既然 IdleStateHandler 包括了读\写超时状态处理，那么很多时候 ReadTimeoutHandler 、 WriteTimeoutHandler 都可以不用使用。定义另一个名为 HeartbeatHandlerInitializer 的 ChannelInitializer ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeartbeatHandlerInitializer</span> <span class="keyword">extends</span> <span class="title">ChannelInitializer</span>&lt;<span class="title">Channel</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> READ_IDEL_TIME_OUT = <span class="number">4</span>; <span class="comment">// 读超时</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> WRITE_IDEL_TIME_OUT = <span class="number">5</span>;<span class="comment">// 写超时</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ALL_IDEL_TIME_OUT = <span class="number">7</span>; <span class="comment">// 所有超时</span></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(Channel ch)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        ChannelPipeline pipeline = ch.pipeline();</div><div class="line">        pipeline.addLast(<span class="keyword">new</span> IdleStateHandler(READ_IDEL_TIME_OUT,</div><div class="line">                WRITE_IDEL_TIME_OUT, ALL_IDEL_TIME_OUT, TimeUnit.SECONDS)); <span class="comment">// 1</span></div><div class="line">        pipeline.addLast(<span class="keyword">new</span> HeartbeatServerHandler()); <span class="comment">// 2</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用了 IdleStateHandler ，分别设置了读、写超时的时间<br>定义了一个 HeartbeatServerHandler 处理器，用来处理超时时，发送心跳<br>定义了一个心跳处理器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeartbeatServerHandler</span> <span class="keyword">extends</span> <span class="title">ChannelInboundHandlerAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// Return a unreleasable view on the given ByteBuf</span></div><div class="line">    <span class="comment">// which will just ignore release and retain calls.</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ByteBuf HEARTBEAT_SEQUENCE = Unpooled</div><div class="line">            .unreleasableBuffer(Unpooled.copiedBuffer(<span class="string">"Heartbeat"</span>,</div><div class="line">                    CharsetUtil.UTF_8));  <span class="comment">// 1</span></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">userEventTriggered</span><span class="params">(ChannelHandlerContext ctx, Object evt)</span></span></div><div class="line">            <span class="keyword">throws</span> Exception &#123;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (evt <span class="keyword">instanceof</span> IdleStateEvent) &#123;  <span class="comment">// 2</span></div><div class="line">            IdleStateEvent event = (IdleStateEvent) evt;  </div><div class="line">            String type = <span class="string">""</span>;</div><div class="line">            <span class="keyword">if</span> (event.state() == IdleState.READER_IDLE) &#123;</div><div class="line">                type = <span class="string">"read idle"</span>;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event.state() == IdleState.WRITER_IDLE) &#123;</div><div class="line">                type = <span class="string">"write idle"</span>;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event.state() == IdleState.ALL_IDLE) &#123;</div><div class="line">                type = <span class="string">"all idle"</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            ctx.writeAndFlush(HEARTBEAT_SEQUENCE.duplicate()).addListener(</div><div class="line">                    ChannelFutureListener.CLOSE_ON_FAILURE);  <span class="comment">// 3</span></div><div class="line"></div><div class="line">            System.out.println( ctx.channel().remoteAddress()+<span class="string">"超时类型："</span> + type);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">super</span>.userEventTriggered(ctx, evt);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>定义了心跳时，要发送的内容<br>判断是否是 IdleStateEvent 事件，是则处理<br>将心跳内容发送给客户端</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -410,12 +1322,21 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">articles</span>
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
 
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
           
 
           
@@ -465,11 +1386,11 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  Thème -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
